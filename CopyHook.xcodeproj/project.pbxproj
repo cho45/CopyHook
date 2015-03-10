@@ -11,6 +11,7 @@
 		74688C951AAF1CC500BD8506 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74688C941AAF1CC500BD8506 /* Images.xcassets */; };
 		74688C981AAF1CC500BD8506 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74688C961AAF1CC500BD8506 /* MainMenu.xib */; };
 		74688CA41AAF1CC500BD8506 /* CopyHookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74688CA31AAF1CC500BD8506 /* CopyHookTests.swift */; };
+		74688CB21AAF1D2800BD8506 /* js.m in Sources */ = {isa = PBXBuildFile; fileRef = 74688CB11AAF1D2800BD8506 /* js.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,9 @@
 		74688C9D1AAF1CC500BD8506 /* CopyHookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CopyHookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74688CA21AAF1CC500BD8506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74688CA31AAF1CC500BD8506 /* CopyHookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyHookTests.swift; sourceTree = "<group>"; };
+		74688CAD1AAF1CEE00BD8506 /* CopyHook-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CopyHook-Bridging-Header.h"; sourceTree = "<group>"; };
+		74688CB11AAF1D2800BD8506 /* js.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = js.m; path = ../js.m; sourceTree = "<group>"; };
+		74688CB31AAF1D4300BD8506 /* js.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = js.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,10 +77,13 @@
 		74688C8F1AAF1CC500BD8506 /* CopyHook */ = {
 			isa = PBXGroup;
 			children = (
+				74688CB11AAF1D2800BD8506 /* js.m */,
+				74688CB31AAF1D4300BD8506 /* js.h */,
 				74688C921AAF1CC500BD8506 /* AppDelegate.swift */,
 				74688C941AAF1CC500BD8506 /* Images.xcassets */,
 				74688C961AAF1CC500BD8506 /* MainMenu.xib */,
 				74688C901AAF1CC500BD8506 /* Supporting Files */,
+				74688CAD1AAF1CEE00BD8506 /* CopyHook-Bridging-Header.h */,
 			);
 			path = CopyHook;
 			sourceTree = "<group>";
@@ -205,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74688CB21AAF1D2800BD8506 /* js.m in Sources */,
 				74688C931AAF1CC500BD8506 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,10 +328,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CopyHook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CopyHook/CopyHook-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -331,10 +342,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CopyHook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CopyHook/CopyHook-Bridging-Header.h";
 			};
 			name = Release;
 		};
