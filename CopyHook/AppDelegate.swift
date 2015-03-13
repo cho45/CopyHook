@@ -9,24 +9,50 @@
 import Cocoa
 import JavaScriptCore
 
-@objc protocol PasteboardEventJSExport : JSExport {
+@objc protocol PasteboardJSExport : JSExport {
     func stringForType(type: String)->String?
     func clearContents()
     func setStringForType(str: String, _ type: String)
-    func focusedApplicationBundleId()->String?
+    func types()->[String]!
 }
 
-public class PasteboardEvent : NSObject, PasteboardEventJSExport {
+public class Pasteboard : NSObject, PasteboardJSExport {
+    let pb = NSPasteboard.generalPasteboard()
     public func stringForType(type: String)->String? {
-        return NSPasteboard.generalPasteboard().stringForType(type)
+        return pb.stringForType(type)
     }
     
     public func clearContents() {
-        NSPasteboard.generalPasteboard().clearContents()
+        pb.clearContents()
     }
     
     public func setStringForType(str: String, _ type: String) {
-        NSPasteboard.generalPasteboard().setString(str, forType: type)
+        pb.setString(str, forType: type)
+    }
+    
+    public func types()->[String]! {
+        if let types = pb.types {
+            return types as [String]
+        } else {
+            return []
+        }
+    }
+}
+
+@objc protocol CopyHookBridgeJSExport : JSExport {
+    func focusedApplicationBundleId()->String?
+    func require(path: String)->Bool
+    func log(str: String)
+}
+
+public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
+    let context : JSContext
+    init(context: JSContext) {
+        self.context = context
+    }
+    
+    public func log(str:String) {
+        print(str)
     }
     
     public func focusedApplicationBundleId()->String? {
@@ -45,53 +71,44 @@ public class PasteboardEvent : NSObject, PasteboardEventJSExport {
         
         return NSRunningApplication(processIdentifier: pid)?.bundleIdentifier
     }
+    
+    func require(path: String)->Bool {
+        let file = NSHomeDirectory() + "/.copyhook/" + path
+        return loadJavaScriptFile(file)
+    }
+    
+    func loadJavaScriptFile(path: String)->Bool {
+        if NSFileManager.defaultManager().fileExistsAtPath(path) {
+            context.exceptionHandler = { (context: JSContext!, exception: JSValue!) -> Void in
+                if exception.isObject() {
+                    let line = exception.toDictionary()["line"] as NSNumber
+                    let message = exception.toString()
+                    println("\(path):\(line) \(message)")
+                } else {
+                    println("uncaught exception: \(exception)")
+                }
+            }
+            
+            let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
+            context.evaluateScript(content)
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }
-
 
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     var js : JSContext! = nil
+    var bridge: CopyHookBridge! = nil
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        let dotfile = NSHomeDirectory() + "/.copyhook.js"
-        
-        println(dotfile)
-        
-        let dotcontent = NSString(contentsOfFile: dotfile, encoding: NSUTF8StringEncoding, error: nil)!
-
-        
-        js = JSContext()
-        js.exceptionHandler = { (context: JSContext!, exception: JSValue!) -> Void in
-            println(exception)
-        }
-        
-        js.setFunction( { (arg:AnyObject!) -> AnyObject in
-            println(arg)
-            return ""
-        }, forKeyedSubscript: "log")
-        
-        js.evaluateScript(dotcontent)
-        
-        /*
-        js.setObject("test", forKeyedSubscript: "test")
-        
-        
-        let ret : JSValue = js.evaluateScript("test")
-        let str = ret.toString()
-        println(ret)
-        
-        println(js.evaluateScript("foo()"))
-*/
-        
-        /*
-        let rect = NSRect(x: 0, y: 0, width: 800, height: 500)
-        let webview = WebView(frame: rect)
-        println(webview)
-        println(webview.stringByEvaluatingJavaScriptFromString("'foobar';"))
-        */
+        createJSContext()
         
         NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.KeyDownMask) { (e: NSEvent!) in
             let cmd = (e.modifierFlags & NSEventModifierFlags.DeviceIndependentModifierFlagsMask).rawValue == NSEventModifierFlags.CommandKeyMask.rawValue
@@ -109,12 +126,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    func createJSContext() {
+        js = JSContext()
+        js.setObject(Pasteboard(), forKeyedSubscript: "pasteboard")
+        
+        bridge = CopyHookBridge(context: js)
+        js.setObject(bridge, forKeyedSubscript: "__bridge")
+        
+        bridge.loadJavaScriptFile(NSBundle.mainBundle().pathForResource("init", ofType: "js")!)
+        
+        let dotfile = NSHomeDirectory() + "/.copyhook.js"
+        println(dotfile)
+        bridge.loadJavaScriptFile(dotfile)
+    }
+    
     func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
     }
     
     func treatPasteboard() {
-        println("treatPasteboard")
         /*
         let pb = NSPasteboard.generalPasteboard()
         println(pb.types)
@@ -122,9 +151,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         println(pb.stringForType("public.html"))
 */
         
-        let e = PasteboardEvent()
         if let cb = js.objectForKeyedSubscript("onCopied") {
-            cb.callWithArguments([ e ])
+            cb.callWithArguments([ ])
+        } else {
+            println("onCopied() is not defined.")
         }
     }
     

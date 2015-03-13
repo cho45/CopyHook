@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28C860EA1AB2CEA700EB021C /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = 28C860E91AB2CEA700EB021C /* init.js */; };
+		28C860EC1AB2EA3000EB021C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 28C860EB1AB2EA3000EB021C /* README.md */; };
 		74688C931AAF1CC500BD8506 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74688C921AAF1CC500BD8506 /* AppDelegate.swift */; };
 		74688C951AAF1CC500BD8506 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74688C941AAF1CC500BD8506 /* Images.xcassets */; };
 		74688C981AAF1CC500BD8506 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74688C961AAF1CC500BD8506 /* MainMenu.xib */; };
 		74688CA41AAF1CC500BD8506 /* CopyHookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74688CA31AAF1CC500BD8506 /* CopyHookTests.swift */; };
-		74688CB21AAF1D2800BD8506 /* js.m in Sources */ = {isa = PBXBuildFile; fileRef = 74688CB11AAF1D2800BD8506 /* js.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +26,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28C860E91AB2CEA700EB021C /* init.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
+		28C860EB1AB2EA3000EB021C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		74688C8D1AAF1CC500BD8506 /* CopyHook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyHook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74688C911AAF1CC500BD8506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74688C921AAF1CC500BD8506 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,8 +37,6 @@
 		74688CA21AAF1CC500BD8506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74688CA31AAF1CC500BD8506 /* CopyHookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyHookTests.swift; sourceTree = "<group>"; };
 		74688CAD1AAF1CEE00BD8506 /* CopyHook-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CopyHook-Bridging-Header.h"; sourceTree = "<group>"; };
-		74688CB11AAF1D2800BD8506 /* js.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = js.m; path = ../js.m; sourceTree = "<group>"; };
-		74688CB31AAF1D4300BD8506 /* js.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = js.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,13 +78,13 @@
 		74688C8F1AAF1CC500BD8506 /* CopyHook */ = {
 			isa = PBXGroup;
 			children = (
-				74688CB11AAF1D2800BD8506 /* js.m */,
-				74688CB31AAF1D4300BD8506 /* js.h */,
 				74688C921AAF1CC500BD8506 /* AppDelegate.swift */,
 				74688C941AAF1CC500BD8506 /* Images.xcassets */,
 				74688C961AAF1CC500BD8506 /* MainMenu.xib */,
 				74688C901AAF1CC500BD8506 /* Supporting Files */,
 				74688CAD1AAF1CEE00BD8506 /* CopyHook-Bridging-Header.h */,
+				28C860E91AB2CEA700EB021C /* init.js */,
+				28C860EB1AB2EA3000EB021C /* README.md */,
 			);
 			path = CopyHook;
 			sourceTree = "<group>";
@@ -193,6 +194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28C860EA1AB2CEA700EB021C /* init.js in Resources */,
 				74688C951AAF1CC500BD8506 /* Images.xcassets in Resources */,
 				74688C981AAF1CC500BD8506 /* MainMenu.xib in Resources */,
 			);
@@ -212,7 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74688CB21AAF1D2800BD8506 /* js.m in Sources */,
+				28C860EC1AB2EA3000EB021C /* README.md in Sources */,
 				74688C931AAF1CC500BD8506 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,6 +334,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CopyHook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CopyHook/CopyHook-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -346,6 +349,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CopyHook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CopyHook/CopyHook-Bridging-Header.h";
 			};
@@ -406,6 +410,7 @@
 				74688CA91AAF1CC500BD8506 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		74688CAA1AAF1CC500BD8506 /* Build configuration list for PBXNativeTarget "CopyHookTests" */ = {
 			isa = XCConfigurationList;
@@ -414,6 +419,7 @@
 				74688CAC1AAF1CC500BD8506 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
