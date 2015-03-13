@@ -112,9 +112,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             menuEnabled.state = enabled ? 1 : 0
         }
     }
+    
+    var lastLoadedTime: NSTimeInterval = 0
+    
     var js : JSContext! = nil
     var bridge: CopyHookBridge! = nil
     
+    let dotfile = NSHomeDirectory() + "/.copyhook.js"
+    let dotdirectory = NSHomeDirectory() + "/.copyhook/"
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         statusItem.menu = menu
@@ -149,9 +154,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         bridge.loadJavaScriptFile(NSBundle.mainBundle().pathForResource("init", ofType: "js")!)
         
-        let dotfile = NSHomeDirectory() + "/.copyhook.js"
         println(dotfile)
         bridge.loadJavaScriptFile(dotfile)
+    }
+    
+    func dotfilesTime()->NSTimeInterval {
+        let fs = NSFileManager.defaultManager()
+        var time: NSTimeInterval = 0
+        
+        // println("dotfilesTime")
+        var files: [ String ] = [ dotfile ]
+        let dir = fs.enumeratorAtPath(dotdirectory)
+        while let file = dir?.nextObject() as? String {
+            files.append(dotdirectory + file)
+        }
+        
+        // println(files)
+        
+        for file in files {
+            if let attrs: NSDictionary = fs.attributesOfItemAtPath(file.stringByResolvingSymlinksInPath, error: nil) {
+                let date: NSDate = attrs.fileModificationDate()!
+                if time < date.timeIntervalSince1970 {
+                    time = date.timeIntervalSince1970
+                }
+            }
+        }
+        
+        return time
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
@@ -161,6 +190,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !enabled {
             return
         }
+        
+        let time: NSTimeInterval = dotfilesTime()
+        if lastLoadedTime < time {
+            println("reload")
+            createJSContext()
+            lastLoadedTime = time
+        }
+        
         /*
         let pb = NSPasteboard.generalPasteboard()
         println(pb.types)
