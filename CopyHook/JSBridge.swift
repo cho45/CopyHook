@@ -53,7 +53,7 @@ public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
     }
     
     public func log(str:String) {
-        print(str)
+        NSLog(str)
     }
     
     public func focusedApplicationBundleId()->String? {
@@ -84,9 +84,9 @@ public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
                 if exception.isObject() {
                     let line = exception.toDictionary()["line"] as NSNumber
                     let message = exception.toString()
-                    println("\(path):\(line) \(message)")
+                    self.log("\(path):\(line) \(message)\n")
                 } else {
-                    println("uncaught exception: \(exception)")
+                    self.log("uncaught exception: \(exception)\n")
                 }
             }
             
