@@ -31,6 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let dotdirectory = NSHomeDirectory() + "/.copyhook/"
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        Accessibility.checkAccessibilityEnabled(self)
+        
         statusItem.menu = menu
         statusItem.title = NSRunningApplication.currentApplication().localizedName!
         // statusItem.image = NSImage(named: "icon-menu")
