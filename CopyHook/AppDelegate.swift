@@ -102,12 +102,26 @@ public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    @IBOutlet weak var menuEnabled: NSMenuItem!
+    @IBOutlet weak var menu: NSMenu!
     
+    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
+    
+    var enabled: Bool = true {
+        didSet {
+            menuEnabled.state = enabled ? 1 : 0
+        }
+    }
     var js : JSContext! = nil
     var bridge: CopyHookBridge! = nil
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        statusItem.menu = menu
+        statusItem.title = NSRunningApplication.currentApplication().localizedName!
+        // statusItem.image = NSImage(named: "icon-menu")
+        statusItem.highlightMode = true
+        
         createJSContext()
         
         NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.KeyDownMask) { (e: NSEvent!) in
@@ -144,6 +158,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func treatPasteboard() {
+        if !enabled {
+            return
+        }
         /*
         let pb = NSPasteboard.generalPasteboard()
         println(pb.types)
@@ -158,5 +175,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    @IBAction func toggleState(sender: AnyObject) {
+        enabled = !enabled
+    }
 }
 
