@@ -10,6 +10,10 @@ var console = {
 var utils = {
     focusedApplicationBundleId : function () {
         return __bridge.focusedApplicationBundleId();
+    },
+    
+    system : function (program, stdin) {
+        return __bridge.system(program || "", stdin || "");
     }
 };
 

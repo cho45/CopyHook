@@ -43,6 +43,7 @@ public class Pasteboard : NSObject, PasteboardJSExport {
     func focusedApplicationBundleId()->String?
     func require(path: String)->Bool
     func log(str: String)
+    func system(program: String, _ input: String)->String
 }
 
 public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
@@ -97,5 +98,23 @@ public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
         }
     }
     
+    func system(program: String, _ input: String)->String {
+        let pipeStdout = NSPipe()
+        let stdout     = pipeStdout.fileHandleForReading
+        let pipeStdin  = NSPipe()
+        let stdin      = pipeStdin.fileHandleForWriting
+        
+        let task = NSTask()
+        task.launchPath = "/bin/sh"
+        task.arguments = ["-c", program]
+        task.standardOutput = pipeStdout
+        task.standardInput  = pipeStdin
+        task.launch()
+        stdin.writeData(input.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
+        stdin.closeFile()
+        
+        let ret = NSString(data: stdout.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)!
+        return ret
+    }
 }
 
