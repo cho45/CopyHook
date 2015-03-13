@@ -32,7 +32,11 @@ Get string from pasteboard by type "public.utf8-plain-text".
 
 #### `pasteboard.stringByType(type: String)`
 
+See Also: https://developer.apple.com/library/mac/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html
+
 #### `pasteboard.setStringForType(str: String, type: String)`
+
+See Also: https://developer.apple.com/library/mac/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html
 
 #### `pasteboard.clearContents()`
 
