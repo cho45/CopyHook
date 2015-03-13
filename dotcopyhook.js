@@ -4,7 +4,7 @@ console.log('copyhook.js');
 require("slack.format.js");
 
 function onCopied () {
-	console.log(pb.types());
+	// console.log(pb.types());
 
 	var bundleId = utils.focusedApplicationBundleId();
 	console.log('onCopied: ' + bundleId);

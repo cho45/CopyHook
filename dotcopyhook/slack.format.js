@@ -7,8 +7,8 @@ function formatSlack(text) {
 }
 
 
-/*
-var str = require('fs').readFileSync("slack.txt", { encoding: "utf-8" });
-console.log(str);
-console.log(formatSlack(str));
-*/
+if (typeof module != "undefined") {
+	var str = require('fs').readFileSync("slack.txt", { encoding: "utf-8" });
+	console.log(str);
+	console.log(formatSlack(str));
+}
