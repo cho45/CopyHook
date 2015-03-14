@@ -44,6 +44,7 @@ public class Pasteboard : NSObject, PasteboardJSExport {
     func require(path: String)->Bool
     func log(str: String)
     func system(program: String, _ input: String)->String
+    func focusedWindowName()->String?
 }
 
 public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
@@ -71,6 +72,30 @@ public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
         AXUIElementGetPid(focusedApp, &pid)
         
         return NSRunningApplication(processIdentifier: pid)?.bundleIdentifier
+    }
+    
+    public func focusedWindowName()->String? {
+        var ptr: Unmanaged<AnyObject>?
+        
+        let system = AXUIElementCreateSystemWide().takeRetainedValue()
+        
+        AXUIElementCopyAttributeValue(system, "AXFocusedApplication", &ptr)
+        if ptr == nil {
+            return nil
+        }
+        let focusedApp = ptr!.takeRetainedValue() as AXUIElement
+        
+        AXUIElementCopyAttributeValue(focusedApp, NSAccessibilityFocusedWindowAttribute, &ptr)
+        if ptr == nil {
+            return nil
+        }
+        let window = ptr!.takeRetainedValue() as AXUIElement
+        AXUIElementCopyAttributeValue(window, NSAccessibilityTitleAttribute, &ptr)
+        if ptr == nil {
+            return nil
+        }
+        
+        return ptr!.takeRetainedValue() as? String
     }
     
     func require(path: String)->Bool {

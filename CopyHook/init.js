@@ -12,6 +12,10 @@ var utils = {
         return __bridge.focusedApplicationBundleId();
     },
     
+    focusedWindowName : function () {
+        return __bridge.focusedWindowName();
+    },
+    
     system : function (program, stdin) {
         return __bridge.system(program || "", stdin || "");
     }

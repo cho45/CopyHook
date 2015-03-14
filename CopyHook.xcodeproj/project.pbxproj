@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		28C860EA1AB2CEA700EB021C /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = 28C860E91AB2CEA700EB021C /* init.js */; };
-		28C860EC1AB2EA3000EB021C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 28C860EB1AB2EA3000EB021C /* README.md */; };
 		74688C931AAF1CC500BD8506 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74688C921AAF1CC500BD8506 /* AppDelegate.swift */; };
 		74688C951AAF1CC500BD8506 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74688C941AAF1CC500BD8506 /* Images.xcassets */; };
 		74688C981AAF1CC500BD8506 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74688C961AAF1CC500BD8506 /* MainMenu.xib */; };
 		74688CA41AAF1CC500BD8506 /* CopyHookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74688CA31AAF1CC500BD8506 /* CopyHookTests.swift */; };
 		74DE62311AB341790077D557 /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE62301AB341790077D557 /* JSBridge.swift */; };
 		74DE62331AB349050077D557 /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE62321AB349050077D557 /* Accessibility.swift */; };
+		74DE62361AB3C7690077D557 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 74DE62351AB3C7690077D557 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		28C860E91AB2CEA700EB021C /* init.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
-		28C860EB1AB2EA3000EB021C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		74688C8D1AAF1CC500BD8506 /* CopyHook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyHook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74688C911AAF1CC500BD8506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74688C921AAF1CC500BD8506 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		74DE62301AB341790077D557 /* JSBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; };
 		74DE62321AB349050077D557 /* Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
 		74DE62341AB34AD10077D557 /* CopyHook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CopyHook.entitlements; sourceTree = "<group>"; };
+		74DE62351AB3C7690077D557 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +65,7 @@
 		74688C841AAF1CC500BD8506 = {
 			isa = PBXGroup;
 			children = (
+				74DE62351AB3C7690077D557 /* README.md */,
 				74688C8F1AAF1CC500BD8506 /* CopyHook */,
 				74688CA01AAF1CC500BD8506 /* CopyHookTests */,
 				74688C8E1AAF1CC500BD8506 /* Products */,
@@ -90,7 +91,6 @@
 				74688C901AAF1CC500BD8506 /* Supporting Files */,
 				74688CAD1AAF1CEE00BD8506 /* CopyHook-Bridging-Header.h */,
 				28C860E91AB2CEA700EB021C /* init.js */,
-				28C860EB1AB2EA3000EB021C /* README.md */,
 				74DE62301AB341790077D557 /* JSBridge.swift */,
 				74DE62321AB349050077D557 /* Accessibility.swift */,
 			);
@@ -227,9 +227,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28C860EC1AB2EA3000EB021C /* README.md in Sources */,
 				74DE62311AB341790077D557 /* JSBridge.swift in Sources */,
 				74DE62331AB349050077D557 /* Accessibility.swift in Sources */,
+				74DE62361AB3C7690077D557 /* README.md in Sources */,
 				74688C931AAF1CC500BD8506 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

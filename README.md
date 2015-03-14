@@ -60,9 +60,13 @@ Load JavaScript file from `~/.copyhook/`.
 
 ### `utils` object
 
-#### `utils.focusedApplicationBundleId()->String`
+#### `utils.focusedApplicationBundleId() #=> String`
 
 Returns bundle id of current focused application.
+
+#### `utils.focusedWindowName() #=> String`
+
+Returns title of focused window.
 
 #### `utils.system(program: String, stdin: String) #=> String`
 
