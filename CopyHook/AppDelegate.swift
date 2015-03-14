@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var menuEnabled: NSMenuItem!
     @IBOutlet weak var menu: NSMenu!
     @IBOutlet weak var window: NSWindow!
+    @IBOutlet weak var about: AboutWindow!
     
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
     
@@ -126,6 +127,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func toggleState(sender: AnyObject) {
         enabled = !enabled
+    }
+    
+    @IBAction func showAbout(sender: AnyObject) {
+        about.makeKeyAndOrderFront(nil)
+        NSApp.activateIgnoringOtherApps!(true)
     }
 }
 
