@@ -36,8 +36,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Accessibility.checkAccessibilityEnabled(self)
         
         statusItem.menu = menu
-        statusItem.title = NSRunningApplication.currentApplication().localizedName!
-        // statusItem.image = NSImage(named: "icon-menu")
+        // statusItem.title = NSRunningApplication.currentApplication().localizedName!
+        statusItem.image = NSImage(named: "menubar-icon")
         statusItem.highlightMode = true
         
         createJSContext()

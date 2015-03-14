@@ -14,6 +14,7 @@
 		74688CA41AAF1CC500BD8506 /* CopyHookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74688CA31AAF1CC500BD8506 /* CopyHookTests.swift */; };
 		74B34A6D1AB3D5DB003F91C9 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B34A6C1AB3D5DB003F91C9 /* AboutWindowController.swift */; };
 		74B34A6F1AB3D6B5003F91C9 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 74B34A6E1AB3D6B5003F91C9 /* Credits.html */; };
+		74B34A711AB42DEB003F91C9 /* menubar-icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 74B34A701AB42DEB003F91C9 /* menubar-icon.pdf */; };
 		74DE62311AB341790077D557 /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE62301AB341790077D557 /* JSBridge.swift */; };
 		74DE62331AB349050077D557 /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE62321AB349050077D557 /* Accessibility.swift */; };
 		74DE62361AB3C7690077D557 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 74DE62351AB3C7690077D557 /* README.md */; };
@@ -42,6 +43,7 @@
 		74688CAD1AAF1CEE00BD8506 /* CopyHook-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CopyHook-Bridging-Header.h"; sourceTree = "<group>"; };
 		74B34A6C1AB3D5DB003F91C9 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		74B34A6E1AB3D6B5003F91C9 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		74B34A701AB42DEB003F91C9 /* menubar-icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "menubar-icon.pdf"; sourceTree = "<group>"; };
 		74DE62301AB341790077D557 /* JSBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; };
 		74DE62321AB349050077D557 /* Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
 		74DE62351AB3C7690077D557 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		74688C8F1AAF1CC500BD8506 /* CopyHook */ = {
 			isa = PBXGroup;
 			children = (
+				74B34A701AB42DEB003F91C9 /* menubar-icon.pdf */,
 				74688C921AAF1CC500BD8506 /* AppDelegate.swift */,
 				74688C941AAF1CC500BD8506 /* Images.xcassets */,
 				74688C961AAF1CC500BD8506 /* MainMenu.xib */,
@@ -214,6 +217,7 @@
 				28C860EA1AB2CEA700EB021C /* init.js in Resources */,
 				74B34A6F1AB3D6B5003F91C9 /* Credits.html in Resources */,
 				74688C951AAF1CC500BD8506 /* Images.xcassets in Resources */,
+				74B34A711AB42DEB003F91C9 /* menubar-icon.pdf in Resources */,
 				74688C981AAF1CC500BD8506 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
