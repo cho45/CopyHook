@@ -41,6 +41,7 @@
 		74688CAD1AAF1CEE00BD8506 /* CopyHook-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CopyHook-Bridging-Header.h"; sourceTree = "<group>"; };
 		74DE62301AB341790077D557 /* JSBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; };
 		74DE62321AB349050077D557 /* Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
+		74DE62341AB34AD10077D557 /* CopyHook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CopyHook.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +83,7 @@
 		74688C8F1AAF1CC500BD8506 /* CopyHook */ = {
 			isa = PBXGroup;
 			children = (
+				74DE62341AB34AD10077D557 /* CopyHook.entitlements */,
 				74688C921AAF1CC500BD8506 /* AppDelegate.swift */,
 				74688C941AAF1CC500BD8506 /* Images.xcassets */,
 				74688C961AAF1CC500BD8506 /* MainMenu.xib */,
@@ -169,6 +171,11 @@
 				TargetAttributes = {
 					74688C8C1AAF1CC500BD8506 = {
 						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					74688C9C1AAF1CC500BD8506 = {
 						CreatedOnToolsVersion = 6.1.1;

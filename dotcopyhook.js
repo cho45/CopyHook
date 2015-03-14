@@ -1,6 +1,3 @@
-
-console.log('copyhook.js');
-
 require("slack.format.js");
 
 function onCopied () {
@@ -17,3 +14,4 @@ function onCopied () {
 		pb.copy(formatSlack(text));
 	}
 }
+

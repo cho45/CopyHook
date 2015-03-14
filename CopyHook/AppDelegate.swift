@@ -49,7 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             if let key = e.charactersIgnoringModifiers?.uppercaseString {
                 if key == "C" {
-                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "treatPasteboard", userInfo: nil, repeats: false)
+                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "treatCopy", userInfo: nil, repeats: false)
                 }
             }
             
@@ -64,8 +64,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         js.setObject(bridge, forKeyedSubscript: "__bridge")
         
         bridge.loadJavaScriptFile(NSBundle.mainBundle().pathForResource("init", ofType: "js")!)
-        
-        println(dotfile)
         bridge.loadJavaScriptFile(dotfile)
     }
     
@@ -97,7 +95,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(aNotification: NSNotification) {
     }
     
-    func treatPasteboard() {
+    func treatCopy() {
         if !enabled {
             return
         }
@@ -116,7 +114,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         println(pb.stringForType("public.html"))
 */
         
-        if let cb = js.objectForKeyedSubscript("onCopied") {
+        let cb : JSValue = js.objectForKeyedSubscript("onCopied")
+        if !cb.isUndefined() {
             cb.callWithArguments([ ])
         } else {
             println("onCopied() is not defined.")

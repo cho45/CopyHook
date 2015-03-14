@@ -79,10 +79,11 @@ public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
     }
     
     func loadJavaScriptFile(path: String)->Bool {
+        self.log("Load \(path)")
         if NSFileManager.defaultManager().fileExistsAtPath(path) {
             context.exceptionHandler = { (context: JSContext!, exception: JSValue!) -> Void in
-                if exception.isObject() {
-                    let line = exception.toDictionary()["line"] as NSNumber
+                if exception.isObject() && !exception.isNull() {
+                    let line : NSNumber = exception.toDictionary()["line"] as? NSNumber ?? 0
                     let message = exception.toString()
                     self.log("\(path):\(line) \(message)\n")
                 } else {
