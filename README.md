@@ -3,6 +3,8 @@ CopyHook
 
 An application for manipulating pasteboard.
 
+<img src="https://lh6.googleusercontent.com/-3qwI14DebUQ/VQP_eDfO6WI/AAAAAAAAYc0/CwRH-s4RKVE/s1280/2015-03-14%252018.27.58.png"/>
+
 
 Usage
 -----
