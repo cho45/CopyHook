@@ -16,7 +16,7 @@
             <connections>
                 <outlet property="menu" destination="R9x-Fa-9Rl" id="4b7-kt-5xH"/>
                 <outlet property="menuEnabled" destination="HYy-pY-aFp" id="9dJ-ez-KE6"/>
-                <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="O1g-9m-WyQ"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>

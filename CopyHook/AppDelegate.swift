@@ -13,6 +13,7 @@ import JavaScriptCore
 class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var menuEnabled: NSMenuItem!
     @IBOutlet weak var menu: NSMenu!
+    @IBOutlet weak var window: NSWindow!
     
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
     
