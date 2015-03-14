@@ -40,12 +40,11 @@ Get string by `type`.
 
 Set `str` for `type`.
 
-
-### `pasteboard.dataByType(type: String) #=> String`
+#### `pasteboard.dataByType(type: String) #=> String`
 
 Get base64 encoded string by `type`
 
-### `pasteboard.setDataForType(base64: String, type: String`
+#### `pasteboard.setDataForType(base64: String, type: String`
 
 Set data by base64 encoded string `base64` for `type`.
 
