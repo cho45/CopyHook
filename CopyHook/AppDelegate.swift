@@ -64,6 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bridge = CopyHookBridge(context: js)
         js.setObject(bridge, forKeyedSubscript: "__bridge")
         
+        bridge.setExceptionHandler()
         bridge.loadJavaScriptFile(NSBundle.mainBundle().pathForResource("init", ofType: "js")!)
         bridge.loadJavaScriptFile(dotfile)
     }

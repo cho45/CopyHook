@@ -106,21 +106,26 @@ public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
     func loadJavaScriptFile(path: String)->Bool {
         self.log("Load \(path)")
         if NSFileManager.defaultManager().fileExistsAtPath(path) {
-            context.exceptionHandler = { (context: JSContext!, exception: JSValue!) -> Void in
-                if exception.isObject() && !exception.isNull() {
-                    let line : NSNumber = exception.toDictionary()["line"] as? NSNumber ?? 0
-                    let message = exception.toString()
-                    self.log("\(path):\(line) \(message)\n")
-                } else {
-                    self.log("uncaught exception: \(exception)\n")
-                }
-            }
-            
             let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
-            context.evaluateScript(content)
+            context.evaluateScript(content, withSourceURL: NSURL(fileURLWithPath: path))
             return true
         } else {
             return false
+        }
+    }
+    
+    func setExceptionHandler() {
+        context.exceptionHandler = { (context: JSContext!, exception: JSValue!) -> Void in
+            if exception.isObject() && !exception.isNull() {
+                let dict = exception.toDictionary()
+                let url : String = dict["sourceURL"] as? String ?? ""
+                let line : NSNumber = dict["line"] as? NSNumber ?? 0
+                let column : NSNumber = dict["column"] as? NSNumber ?? 0
+                let message = exception.toString()
+                self.log("\(url):\(line):\(column) \(message)\n")
+            } else {
+                self.log("uncaught exception: \(exception)\n")
+            }
         }
     }
     
