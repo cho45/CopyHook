@@ -11,23 +11,40 @@ import JavaScriptCore
 
 @objc protocol PasteboardJSExport : JSExport {
     func stringForType(type: String)->String?
+    func dataForType(type: String)->String?
+    func setStringForType(str: String, _ type: String)->Bool
+    func setDataForType(base64: String, _ type: String)->Bool
     func clearContents()
-    func setStringForType(str: String, _ type: String)
     func types()->[String]!
 }
 
 public class Pasteboard : NSObject, PasteboardJSExport {
     let pb = NSPasteboard.generalPasteboard()
+    
     public func stringForType(type: String)->String? {
         return pb.stringForType(type)
     }
     
-    public func clearContents() {
-        pb.clearContents()
+    public func dataForType(type: String) -> String? {
+        return pb.dataForType(type)?.base64EncodedStringWithOptions(nil)
     }
     
-    public func setStringForType(str: String, _ type: String) {
+    public func setStringForType(str: String, _ type: String)->Bool {
         pb.setString(str, forType: type)
+        return true
+    }
+    
+    public func setDataForType(base64: String, _ type: String)->Bool {
+        if let data = NSData(base64EncodedString: base64, options: nil) {
+            pb.setData(data, forType: type)
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    public func clearContents() {
+        pb.clearContents()
     }
     
     public func types()->[String]! {
