@@ -9,6 +9,81 @@
 import Cocoa
 import JavaScriptCore
 
+protocol PasteboardObserver {
+    init(callback: ()->Void)
+    func observe()
+    func unobserve()
+}
+
+class KeyEventObserver: NSObject, PasteboardObserver {
+    var callback : ()->Void
+    required init(callback: ()->Void) {
+        self.callback = callback
+    }
+    
+    var monitor: AnyObject!
+    
+    func observe() {
+        if monitor != nil {
+            unobserve()
+        }
+        monitor = NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.KeyDownMask) { (e: NSEvent!) in
+            let cmd = (e.modifierFlags & NSEventModifierFlags.DeviceIndependentModifierFlagsMask).rawValue == NSEventModifierFlags.CommandKeyMask.rawValue
+            
+            if !cmd {
+                return
+            }
+            
+            if let key = e.charactersIgnoringModifiers?.uppercaseString {
+                if key == "C" {
+                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "treatCopy", userInfo: nil, repeats: false)
+                }
+            }
+            
+        }
+    }
+    
+    func unobserve() {
+        NSEvent.removeMonitor(monitor)
+    }
+    
+    func treatCopy() {
+        callback()
+    }
+}
+
+class ChangeCountObserver: NSObject, PasteboardObserver {
+    var callback : ()->Void
+    required init(callback: ()->Void) {
+        self.callback = callback
+    }
+    
+    let pb = NSPasteboard.generalPasteboard()
+    var changeCount : Int = 0
+    var timer: NSTimer!
+    
+    func observe() {
+        if timer != nil {
+            unobserve()
+        }
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "pollPasteboard", userInfo: nil, repeats: true)
+    }
+    
+    func unobserve() {
+        timer.invalidate()
+        timer = nil
+    }
+    
+    func pollPasteboard() {
+        let pbChangeCount = pb.changeCount
+        if pbChangeCount != changeCount {
+            changeCount = pbChangeCount
+            callback()
+        }
+    }
+}
+    
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var menuEnabled: NSMenuItem!
@@ -32,6 +107,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let dotfile = NSHomeDirectory() + "/.copyhook.js"
     let dotdirectory = NSHomeDirectory() + "/.copyhook/"
     
+    var observer: PasteboardObserver!
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         Accessibility.checkAccessibilityEnabled(self)
         
@@ -42,25 +119,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         createJSContext()
         
-        NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.KeyDownMask) { (e: NSEvent!) in
-            let cmd = (e.modifierFlags & NSEventModifierFlags.DeviceIndependentModifierFlagsMask).rawValue == NSEventModifierFlags.CommandKeyMask.rawValue
-            
-            if !cmd {
-                return
-            }
-            
-            if let key = e.charactersIgnoringModifiers?.uppercaseString {
-                if key == "C" {
-                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "treatCopy", userInfo: nil, repeats: false)
-                }
-            }
-            
-        }
+        observer = ChangeCountObserver(callback: {() in
+            self.treatCopy()
+        })
+        observer.observe()
     }
     
     func createJSContext() {
         js = JSContext()
-        js.setObject(Pasteboard(), forKeyedSubscript: "pasteboard")
+        js.setObject(Pasteboard(context: js), forKeyedSubscript: "pasteboard")
         
         bridge = CopyHookBridge(context: js)
         js.setObject(bridge, forKeyedSubscript: "__bridge")

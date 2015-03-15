@@ -12,6 +12,7 @@ import JavaScriptCore
 @objc protocol PasteboardJSExport : JSExport {
     func stringForType(type: String)->String?
     func dataForType(type: String)->String?
+    func dataForType2(type: String)->JSValue
     func setStringForType(str: String, _ type: String)->Bool
     func setDataForType(base64: String, _ type: String)->Bool
     func clearContents()
@@ -21,12 +22,34 @@ import JavaScriptCore
 public class Pasteboard : NSObject, PasteboardJSExport {
     let pb = NSPasteboard.generalPasteboard()
     
+    let context : JSContext
+    init(context: JSContext) {
+        self.context = context
+    }
+    
     public func stringForType(type: String)->String? {
         return pb.stringForType(type)
     }
     
     public func dataForType(type: String) -> String? {
         return pb.dataForType(type)?.base64EncodedStringWithOptions(nil)
+    }
+    
+    public func dataForType2(type: String) -> JSValue {
+        if let data = pb.dataForType(type) {
+            let count = data.length / sizeof(UInt32)
+            var bytes = [UInt32](count: count, repeatedValue: 0)
+            data.getBytes(&bytes, length:count * sizeof(UInt32))
+
+            let array = context.evaluateScript("new Uint32Array( \(count) )")
+            for var i = 0; i < count; i++ {
+                let byte = NSNumber(unsignedInt: bytes[i])
+                array.setValue(byte, atIndex: i)
+            }
+            return array
+        } else {
+            return context.evaluateScript("null")
+        }
     }
     
     public func setStringForType(str: String, _ type: String)->Bool {
