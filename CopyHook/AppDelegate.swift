@@ -90,6 +90,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var menu: NSMenu!
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var about: AboutWindow!
+    @IBOutlet weak var preferences: PreferencesWindow!
     
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
     
@@ -119,9 +120,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         createJSContext()
         
-        observer = ChangeCountObserver(callback: {() in
-            self.treatCopy()
-        })
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "userDefaultsDidChange:",
+            name: NSUserDefaultsDidChangeNotification,
+            object: nil
+        )
+        userDefaultsDidChange(nil)
+    }
+    
+    func userDefaultsDidChange(aNotification: NSNotification!) {
+        println("userDefaultsDidChange")
+        
+        if observer != nil {
+            observer.unobserve()
+        }
+        switch preferences.monitoringMethod {
+        case PreferencesWindow.MonitoringMethod.KeyEvent:
+            observer = KeyEventObserver(callback: self.treatCopy)
+        case PreferencesWindow.MonitoringMethod.ChangeCount:
+            observer = ChangeCountObserver(callback: self.treatCopy)
+        }
         observer.observe()
     }
     
@@ -198,6 +217,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func showAbout(sender: AnyObject) {
         about.makeKeyAndOrderFront(nil)
+        NSApp.activateIgnoringOtherApps!(true)
+    }
+    
+    @IBAction func openPreferencesWindow(sender: AnyObject) {
+        preferences.makeKeyAndOrderFront(nil)
         NSApp.activateIgnoringOtherApps!(true)
     }
 }

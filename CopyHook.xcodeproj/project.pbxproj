@@ -15,6 +15,7 @@
 		74B34A6D1AB3D5DB003F91C9 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B34A6C1AB3D5DB003F91C9 /* AboutWindowController.swift */; };
 		74B34A6F1AB3D6B5003F91C9 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 74B34A6E1AB3D6B5003F91C9 /* Credits.html */; };
 		74B34A711AB42DEB003F91C9 /* menubar-icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 74B34A701AB42DEB003F91C9 /* menubar-icon.pdf */; };
+		74B34A731AB63558003F91C9 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B34A721AB63558003F91C9 /* PreferencesWindowController.swift */; };
 		74DE62311AB341790077D557 /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE62301AB341790077D557 /* JSBridge.swift */; };
 		74DE62331AB349050077D557 /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE62321AB349050077D557 /* Accessibility.swift */; };
 		74DE62361AB3C7690077D557 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 74DE62351AB3C7690077D557 /* README.md */; };
@@ -44,6 +45,7 @@
 		74B34A6C1AB3D5DB003F91C9 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		74B34A6E1AB3D6B5003F91C9 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		74B34A701AB42DEB003F91C9 /* menubar-icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "menubar-icon.pdf"; sourceTree = "<group>"; };
+		74B34A721AB63558003F91C9 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		74DE62301AB341790077D557 /* JSBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; };
 		74DE62321AB349050077D557 /* Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
 		74DE62351AB3C7690077D557 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				74DE62321AB349050077D557 /* Accessibility.swift */,
 				74B34A6C1AB3D5DB003F91C9 /* AboutWindowController.swift */,
 				74B34A6E1AB3D6B5003F91C9 /* Credits.html */,
+				74B34A721AB63558003F91C9 /* PreferencesWindowController.swift */,
 			);
 			path = CopyHook;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74B34A731AB63558003F91C9 /* PreferencesWindowController.swift in Sources */,
 				74DE62311AB341790077D557 /* JSBridge.swift in Sources */,
 				74B34A6D1AB3D5DB003F91C9 /* AboutWindowController.swift in Sources */,
 				74DE62331AB349050077D557 /* Accessibility.swift in Sources */,

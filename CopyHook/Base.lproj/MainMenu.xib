@@ -18,6 +18,7 @@
                 <outlet property="about" destination="EOG-mh-Mn7" id="W6t-4F-290"/>
                 <outlet property="menu" destination="R9x-Fa-9Rl" id="4b7-kt-5xH"/>
                 <outlet property="menuEnabled" destination="HYy-pY-aFp" id="9dJ-ez-KE6"/>
+                <outlet property="preferences" destination="QvC-M9-y7g" id="crx-8e-667"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="O1g-9m-WyQ"/>
             </connections>
         </customObject>
@@ -671,8 +672,8 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="CopyHook" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES"/>
+        <window title="CopyHook" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="PreferencesWindow" customModule="CopyHook" customModuleProvider="target">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="562" height="107"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -691,7 +692,7 @@
                     <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3aC-zQ-Cjp">
                         <rect key="frame" x="277" y="41" width="138" height="46"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        <size key="cellSize" width="138" height="22"/>
+                        <size key="cellSize" width="119" height="18"/>
                         <size key="intercellSpacing" width="4" height="2"/>
                         <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="tJW-Vm-um2">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -712,6 +713,9 @@
                     </matrix>
                 </subviews>
             </view>
+            <connections>
+                <outlet property="matrixMonitoringMethod" destination="3aC-zQ-Cjp" id="lRC-Wg-8yg"/>
+            </connections>
             <point key="canvasLocation" x="192" y="880.5"/>
         </window>
         <menu id="R9x-Fa-9Rl" userLabel="MenuBarMenu">
@@ -722,8 +726,11 @@
                         <action selector="toggleState:" target="Voe-Tx-rLC" id="qi2-rK-UQ4"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Preferences…" enabled="NO" id="tgD-Df-HXa">
+                <menuItem title="Preferences…" id="tgD-Df-HXa">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="openPreferencesWindow:" target="Voe-Tx-rLC" id="jNU-Xf-1Kp"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Wap-ld-6vc"/>
                 <menuItem title="About…" id="0bD-Sk-NyQ">
@@ -740,7 +747,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="238.5" y="559.5"/>
+            <point key="canvasLocation" x="214.5" y="636.5"/>
         </menu>
         <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="EOG-mh-Mn7" customClass="AboutWindow" customModule="CopyHook" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
