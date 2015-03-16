@@ -62,6 +62,12 @@ class PreferencesWindow: NSWindow {
     }
     
     func userDefaultsDidChange(aNotification: NSNotification!) {
+        switch monitoringMethod {
+        case MonitoringMethod.KeyEvent:
+            textPollingInterval.enabled = false
+        case MonitoringMethod.ChangeCount:
+            textPollingInterval.enabled = true
+        }
     }
     
     override func cancelOperation(sender: AnyObject?) {
