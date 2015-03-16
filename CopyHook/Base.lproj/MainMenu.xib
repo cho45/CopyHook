@@ -704,8 +704,16 @@
                         </cells>
                     </matrix>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="boq-4B-XlZ">
-                        <rect key="frame" x="146" y="239" width="125" height="17"/>
+                        <rect key="frame" x="99" y="239" width="172" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Monitoring method:" id="3Av-Oh-usC">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xei-xy-fEa">
+                        <rect key="frame" x="99" y="137" width="172" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Script:" id="YHr-SN-ZTg">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -736,9 +744,17 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WpL-s6-GsW">
+                        <rect key="frame" x="275" y="136" width="139" height="18"/>
+                        <buttonCell key="cell" type="check" title="Auto reload scripts" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Tul-bN-ZN3">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
                 </subviews>
             </view>
             <connections>
+                <outlet property="checkAutoReloading" destination="WpL-s6-GsW" id="HEk-CU-PMe"/>
                 <outlet property="matrixMonitoringMethod" destination="3aC-zQ-Cjp" id="lRC-Wg-8yg"/>
                 <outlet property="textPollingInterval" destination="uzZ-OC-NfN" id="d4R-Gy-gBs"/>
             </connections>

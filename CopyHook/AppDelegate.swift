@@ -115,11 +115,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         
-        let time: NSTimeInterval = dotfilesTime()
-        if lastLoadedTime < time {
-            println("reload")
-            createJSContext()
-            lastLoadedTime = time
+        if preferences.autoReloading {
+            let time: NSTimeInterval = dotfilesTime()
+            if lastLoadedTime < time {
+                println("reload")
+                createJSContext()
+                lastLoadedTime = time
+            }
         }
         
         /*

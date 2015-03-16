@@ -11,6 +11,7 @@ import Cocoa
 class PreferencesWindow: NSWindow {
     @IBOutlet weak var matrixMonitoringMethod: NSMatrix!
     @IBOutlet weak var textPollingInterval: NSTextField!
+    @IBOutlet weak var checkAutoReloading: NSButton!
     
     let userDefaultsController = NSUserDefaultsController.sharedUserDefaultsController()
     
@@ -30,17 +31,25 @@ class PreferencesWindow: NSWindow {
             return userDefaultsController.values.valueForKey("pollingInterval") as Double
         }
     }
+    
+    var autoReloading: Bool {
+        get {
+            return userDefaultsController.values.valueForKey("autoReloading") as Bool
+        }
+    }
 
     override func awakeFromNib() {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.registerDefaults([
             "monitoringMethod": 0,
             "pollingInterval": 1.0,
+            "autoReloading": true,
         ])
         defaults.synchronize()
         
         matrixMonitoringMethod.bind("selectedIndex", toObject: userDefaultsController, withKeyPath: "values.monitoringMethod", options: [ "NSContinuouslyUpdatesValue": true ])
         textPollingInterval.bind("value", toObject: userDefaultsController, withKeyPath: "values.pollingInterval", options: [ "NSContinuouslyUpdatesValue": true ])
+        checkAutoReloading.bind("value", toObject: userDefaultsController, withKeyPath: "values.autoReloading", options: [ "NSContinuouslyUpdatesValue": true ])
         
         
         NSNotificationCenter.defaultCenter().addObserver(
