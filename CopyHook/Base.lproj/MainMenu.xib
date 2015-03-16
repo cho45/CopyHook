@@ -675,14 +675,14 @@
         <window title="CopyHook" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="PreferencesWindow" customModule="CopyHook" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="562" height="276"/>
+            <rect key="contentRect" x="335" y="390" width="608" height="190"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="562" height="276"/>
+                <rect key="frame" x="0.0" y="0.0" width="608" height="190"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3aC-zQ-Cjp">
-                        <rect key="frame" x="277" y="201" width="285" height="60"/>
+                        <rect key="frame" x="277" y="115" width="285" height="60"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         <size key="cellSize" width="285" height="30"/>
                         <size key="intercellSpacing" width="4" height="0.0"/>
@@ -704,7 +704,7 @@
                         </cells>
                     </matrix>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="boq-4B-XlZ">
-                        <rect key="frame" x="99" y="239" width="172" height="17"/>
+                        <rect key="frame" x="99" y="153" width="172" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Monitoring method:" id="3Av-Oh-usC">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -712,7 +712,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xei-xy-fEa">
-                        <rect key="frame" x="99" y="137" width="172" height="17"/>
+                        <rect key="frame" x="99" y="51" width="172" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Script:" id="YHr-SN-ZTg">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -720,7 +720,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uzZ-OC-NfN">
-                        <rect key="frame" x="400" y="171" width="50" height="22"/>
+                        <rect key="frame" x="400" y="85" width="50" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="e3E-Du-4Yo">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="w7O-sW-ucW"/>
                             <font key="font" metaFont="system"/>
@@ -729,7 +729,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LNu-6i-gaR">
-                        <rect key="frame" x="295" y="174" width="99" height="17"/>
+                        <rect key="frame" x="295" y="88" width="99" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Polling Interval:" id="bEt-qi-kvv">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -737,7 +737,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JTB-k9-9D8">
-                        <rect key="frame" x="456" y="174" width="30" height="17"/>
+                        <rect key="frame" x="456" y="88" width="30" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=" sec" id="wqS-Zo-fGa">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -745,7 +745,7 @@
                         </textFieldCell>
                     </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WpL-s6-GsW">
-                        <rect key="frame" x="275" y="136" width="139" height="18"/>
+                        <rect key="frame" x="275" y="50" width="139" height="18"/>
                         <buttonCell key="cell" type="check" title="Auto reload scripts" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Tul-bN-ZN3">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -758,7 +758,7 @@
                 <outlet property="matrixMonitoringMethod" destination="3aC-zQ-Cjp" id="lRC-Wg-8yg"/>
                 <outlet property="textPollingInterval" destination="uzZ-OC-NfN" id="d4R-Gy-gBs"/>
             </connections>
-            <point key="canvasLocation" x="192" y="965"/>
+            <point key="canvasLocation" x="215" y="922"/>
         </window>
         <menu id="R9x-Fa-9Rl" userLabel="MenuBarMenu">
             <items>
