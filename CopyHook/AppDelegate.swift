@@ -9,81 +9,6 @@
 import Cocoa
 import JavaScriptCore
 
-protocol PasteboardObserver {
-    init(callback: ()->Void)
-    func observe()
-    func unobserve()
-}
-
-class KeyEventObserver: NSObject, PasteboardObserver {
-    var callback : ()->Void
-    required init(callback: ()->Void) {
-        self.callback = callback
-    }
-    
-    var monitor: AnyObject!
-    
-    func observe() {
-        if monitor != nil {
-            unobserve()
-        }
-        monitor = NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.KeyDownMask) { (e: NSEvent!) in
-            let cmd = (e.modifierFlags & NSEventModifierFlags.DeviceIndependentModifierFlagsMask).rawValue == NSEventModifierFlags.CommandKeyMask.rawValue
-            
-            if !cmd {
-                return
-            }
-            
-            if let key = e.charactersIgnoringModifiers?.uppercaseString {
-                if key == "C" {
-                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "treatCopy", userInfo: nil, repeats: false)
-                }
-            }
-            
-        }
-    }
-    
-    func unobserve() {
-        NSEvent.removeMonitor(monitor)
-    }
-    
-    func treatCopy() {
-        callback()
-    }
-}
-
-class ChangeCountObserver: NSObject, PasteboardObserver {
-    var callback : ()->Void
-    required init(callback: ()->Void) {
-        self.callback = callback
-    }
-    
-    let pb = NSPasteboard.generalPasteboard()
-    var changeCount : Int = 0
-    var timer: NSTimer!
-    
-    func observe() {
-        if timer != nil {
-            unobserve()
-        }
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "pollPasteboard", userInfo: nil, repeats: true)
-    }
-    
-    func unobserve() {
-        timer.invalidate()
-        timer = nil
-    }
-    
-    func pollPasteboard() {
-        let pbChangeCount = pb.changeCount
-        if pbChangeCount != changeCount {
-            changeCount = pbChangeCount
-            callback()
-        }
-    }
-}
-    
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var menuEnabled: NSMenuItem!
@@ -137,11 +62,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         switch preferences.monitoringMethod {
         case PreferencesWindow.MonitoringMethod.KeyEvent:
-            observer = KeyEventObserver(callback: self.treatCopy)
+            observer = KeyEventObserver()
         case PreferencesWindow.MonitoringMethod.ChangeCount:
-            observer = ChangeCountObserver(callback: self.treatCopy)
+            observer = ChangeCountObserver(pollingInterval: preferences.pollingInterval)
         }
-        observer.observe()
+        println("Using \(_stdlib_getDemangledTypeName(observer!))")
+        observer.observe(self.treatCopy)
     }
     
     func createJSContext() {

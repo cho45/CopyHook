@@ -10,6 +10,7 @@ import Cocoa
 
 class PreferencesWindow: NSWindow {
     @IBOutlet weak var matrixMonitoringMethod: NSMatrix!
+    @IBOutlet weak var textPollingInterval: NSTextField!
     
     let userDefaultsController = NSUserDefaultsController.sharedUserDefaultsController()
     
@@ -20,19 +21,27 @@ class PreferencesWindow: NSWindow {
     var monitoringMethod : MonitoringMethod {
         get {
             let rawValue = userDefaultsController.values.valueForKey("monitoringMethod") as Int
-            println(rawValue)
             return MonitoringMethod(rawValue: rawValue)!
         }
     }
     
+    var pollingInterval : Double {
+        get {
+            return userDefaultsController.values.valueForKey("pollingInterval") as Double
+        }
+    }
+
     override func awakeFromNib() {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.registerDefaults([
             "monitoringMethod": 0,
+            "pollingInterval": 1.0,
         ])
         defaults.synchronize()
         
         matrixMonitoringMethod.bind("selectedIndex", toObject: userDefaultsController, withKeyPath: "values.monitoringMethod", options: [ "NSContinuouslyUpdatesValue": true ])
+        textPollingInterval.bind("value", toObject: userDefaultsController, withKeyPath: "values.pollingInterval", options: [ "NSContinuouslyUpdatesValue": true ])
+        
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
