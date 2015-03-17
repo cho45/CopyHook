@@ -177,19 +177,25 @@ public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
     func system(program: String, _ input: String)->String {
         let pipeStdout = NSPipe()
         let stdout     = pipeStdout.fileHandleForReading
+        let pipeStderr = NSPipe()
+        let stderr     = pipeStderr.fileHandleForReading
         let pipeStdin  = NSPipe()
         let stdin      = pipeStdin.fileHandleForWriting
         
         let task = NSTask()
+        task.currentDirectoryPath = NSHomeDirectory()
         task.launchPath = "/bin/sh"
         task.arguments = ["-c", program]
         task.standardOutput = pipeStdout
         task.standardInput  = pipeStdin
+        task.standardError  = pipeStderr
         task.launch()
         stdin.writeData(input.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
         stdin.closeFile()
         
         let ret = NSString(data: stdout.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)!
+        let err = NSString(data: stderr.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)!
+        log(err)
         return ret
     }
 }
