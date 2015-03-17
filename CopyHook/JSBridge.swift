@@ -147,7 +147,12 @@ public class CopyHookBridge : NSObject, CopyHookBridgeJSExport {
         self.log("Load \(path)")
         if NSFileManager.defaultManager().fileExistsAtPath(path) {
             let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
-            context.evaluateScript(content, withSourceURL: NSURL(fileURLWithPath: path))
+            if context.respondsToSelector("evaluateScript:withSourceURL:") {
+                context.evaluateScript(content, withSourceURL: NSURL(fileURLWithPath: path))
+            } else {
+                // for 10.9 Mavericks
+                context.evaluateScript(content)
+            }
             return true
         } else {
             return false
